@@ -7,3 +7,5 @@
 // @todo: Функция удаления карточки
 
 // @todo: Вывести карточки на страницу
+import './index.css'
+import '../scripts/cards.js'
