@@ -1,5 +1,6 @@
 import './index.css'
-import { createCard, deleteCard, like, initialCards } from '../scripts/cards.js'
+import { initialCards } from '../scripts/cards.js'
+import { createCard, deleteCard, like } from '../scripts/card.js'
 import { openPopup, closePopup } from '../scripts/modal.js'
 
 const editButton = document.querySelector('.profile__edit-button')
