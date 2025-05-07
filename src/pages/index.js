@@ -9,3 +9,4 @@
 // @todo: Вывести карточки на страницу
 import './index.css'
 import '../scripts/cards.js'
+import '../scripts/modal.js'
