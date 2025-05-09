@@ -17,11 +17,6 @@ const editForm = document.forms['edit-profile']
 const createForm = document.forms['new-place']
 const placesList = document.querySelector('.places__list')
 
-document.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup'))
-        closePopup(evt.target)
-})
-
 editButton.addEventListener('click', () => {
     editForm.name.value = profileName.textContent
     editForm.description.value = profileDescription.textContent

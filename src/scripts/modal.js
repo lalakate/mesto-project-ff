@@ -11,12 +11,14 @@ export const openPopup = (popup) => {
     currentOpenPopup = popup
 
     document.addEventListener('keydown', handleEscapeClose)
+    popup.addEventListener('click', handleOverlayClose)
 } 
 
 export const closePopup = (popup) => {
     popup.classList.remove('popup_is-opened')
     currentOpenPopup = null
     document.removeEventListener('keydown', handleEscapeClose)
+    popup.removeEventListener('click', handleOverlayClose)
 }
 
 const handleEscapeClose = (evt) => {
