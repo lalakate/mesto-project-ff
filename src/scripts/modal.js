@@ -1,5 +1,3 @@
-import { enableValidation, resetValidation } from "./validation"
-
 let currentOpenPopup = null
 
 export const openPopup = (popup) => {
@@ -14,12 +12,8 @@ export const openPopup = (popup) => {
 
     document.addEventListener('keydown', handleEscapeClose)
     popup.addEventListener('click', handleOverlayClose)
-    enableValidation()
 
     const form = popup.querySelector('.popup__form');
-    if (form) {
-        resetValidation(form);
-    }
 } 
 
 export const closePopup = (popup) => {
@@ -27,6 +21,16 @@ export const closePopup = (popup) => {
     currentOpenPopup = null
     document.removeEventListener('keydown', handleEscapeClose)
     popup.removeEventListener('click', handleOverlayClose)
+}
+
+export const setButtonLoading = (button, isLoading) => {
+    if (isLoading) {
+        button.textContent = 'Сохранение...';
+        button.disabled = true;
+    } else {
+        button.textContent = 'Сохранить';
+        button.disabled = false;
+    }
 }
 
 const handleEscapeClose = (evt) => {
