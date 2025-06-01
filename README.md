@@ -13,4 +13,4 @@ https://github.com/lalakate/mesto-project-ff.git
 ```
 
 ## GitHub Pages
-[Deployed project link](https://lalakate.io/mesto-project-ff)
+[Deployed project link](https://lalakate.github.io/mesto-project-ff/)
