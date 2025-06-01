@@ -12,7 +12,5 @@ This project was created to consolidate the skills in the JavaScript basics, val
 https://github.com/lalakate/mesto-project-ff.git
 ```
 
-##GitHub Pages
-```bash
-https://lalakate.io/mesto-project-ff
-```
+## GitHub Pages
+[GitHub Pages](https://lalakate.io/mesto-project-ff)
