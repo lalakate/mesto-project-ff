@@ -1,3 +1,5 @@
+import { enableValidation, resetValidation } from "./validation"
+
 let currentOpenPopup = null
 
 export const openPopup = (popup) => {
@@ -12,6 +14,12 @@ export const openPopup = (popup) => {
 
     document.addEventListener('keydown', handleEscapeClose)
     popup.addEventListener('click', handleOverlayClose)
+    enableValidation()
+
+    const form = popup.querySelector('.popup__form');
+    if (form) {
+        resetValidation(form);
+    }
 } 
 
 export const closePopup = (popup) => {
@@ -32,3 +40,4 @@ const handleOverlayClose = (evt) => {
         closePopup(currentOpenPopup)
     }
 }
+
