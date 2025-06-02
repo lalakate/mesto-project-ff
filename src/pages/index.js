@@ -1,6 +1,6 @@
 import './index.css'
 import { createCard, deleteCard, like } from '../scripts/card.js'
-import { openPopup, closePopup, setButtonLoading } from '../scripts/modal.js'
+import { openPopup, closePopup } from '../scripts/modal.js'
 import { editProfile, getInitialCards, getProfileInfo, addNewCard, updateAvatar } from '../scripts/api.js'
 import { enableValidation, resetValidation } from '../scripts/validation.js'
 
@@ -22,7 +22,16 @@ const editAvatarButton = document.querySelector('.profile__image__edit-button')
 const placesList = document.querySelector('.places__list')
 const avatarImage = document.querySelector('.profile__image')
 
-enableValidation()
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+}
+
+enableValidation(validationConfig)
 
 editButton.addEventListener('click', () => {
     editForm.name.value = profileName.textContent
@@ -37,6 +46,7 @@ editAvatarButton.addEventListener('click', () => {
 })
 
 addButton.addEventListener('click', () => {
+    createForm.reset()
     createForm.reset()
     openPopup(addPopUp)
 })
@@ -108,33 +118,37 @@ editAvatarForm.addEventListener('submit', (evt) => {
       });
 });
 
-getProfileInfo()
-.then(profile => {
-    profileName.textContent = profile.name
-    profileDescription.textContent = profile.about
-    window.currentUserId = profile._id
-    avatarImage.style.backgroundImage = `url('${profile.avatar}')`
+const setButtonLoading = (button, isLoading) => {
+    if (isLoading) {
+        button.textContent = 'Сохранение...';
+        button.disabled = true;
+    } else {
+        button.textContent = 'Сохранить';
+        button.disabled = false;
+    }
+}
 
-    getInitialCards()
-    .then(cards => {
-        cards.forEach(cardData => {
-            const card = createCard(
-                cardData,
-                deleteCard,
-                openPopup,
-                like,
-                popupImage,
-                popupCaption,
-                cardImagePopup,
-                window.currentUserId 
-            );
-            placesList.append(card);
-        });
-    })
-    .catch(err => {
-        console.log(err)
+Promise.all([getProfileInfo(), getInitialCards()])
+  .then(([profile, cards]) => {
+    profileName.textContent = profile.name;
+    profileDescription.textContent = profile.about;
+    window.currentUserId = profile._id;
+    avatarImage.style.backgroundImage = `url('${profile.avatar}')`;
+
+    cards.forEach(cardData => {
+      const card = createCard(
+        cardData,
+        deleteCard,
+        openPopup,
+        like,
+        popupImage,
+        popupCaption,
+        cardImagePopup,
+        window.currentUserId
+      );
+      placesList.append(card);
     });
-})
-.catch(err => {
-    console.log(err)
-})
+  })
+  .catch(err => {
+    console.log(err);
+  });

@@ -23,16 +23,6 @@ export const closePopup = (popup) => {
     popup.removeEventListener('click', handleOverlayClose)
 }
 
-export const setButtonLoading = (button, isLoading) => {
-    if (isLoading) {
-        button.textContent = 'Сохранение...';
-        button.disabled = true;
-    } else {
-        button.textContent = 'Сохранить';
-        button.disabled = false;
-    }
-}
-
 const handleEscapeClose = (evt) => {
     if(evt.key === 'Escape' && currentOpenPopup) {
         closePopup(currentOpenPopup)
