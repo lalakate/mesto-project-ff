@@ -47,7 +47,6 @@ editAvatarButton.addEventListener('click', () => {
 
 addButton.addEventListener('click', () => {
     createForm.reset()
-    createForm.reset()
     openPopup(addPopUp)
 })
 
